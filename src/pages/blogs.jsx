@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import NavBar from '../components/Nav';
 import Empty from './empty';
@@ -6,18 +7,24 @@ import AppContext from '../context/Context';
 import { BeatLoader} from 'react-spinners';
 
 const Blogs = () => {
+  const nav = useNavigate();
     const [postsLoading, setPostsLoading] = useState(true);
     const [posts, setPosts] = useState([])
-    const {searchQuery, setSearchQuery, loadersConfig} = useContext(AppContext);
+    const {searchQuery, setSearchQuery, loadersConfig, baseURL} = useContext(AppContext);
     useEffect(() => document.title = 'Blogs', [])
     useEffect(async function pullPosts(){
 
       setPostsLoading(true)
-      const response = await fetch('https://blogr-heroku.herokuapp.com/blogs/');
-      const data = await response.json();
-      console.log((data.blogs))
-      setPosts(data.blogs)
-      setPostsLoading(false)
+      try {
+        const response = await fetch(`${baseURL}/blogs/`);
+        const data = await response.json();
+        
+        setPosts(data.blogs)
+        setPostsLoading(false)
+      } catch (error) {
+        setPostsLoading(false);
+        return;
+      }
 
     }, [searchQuery])
 
@@ -36,10 +43,10 @@ const Blogs = () => {
                         md:px-10 xl:px-[10vw] sm:px-[5vw]
         '>
           {posts.map(post => 
-              <div key={post.id} className='px-10 mb-5 md:px-0 '>
-                <div  className='duration-500 bg-green-400 hover:bg-white hover:text-green-400 text-white cursor-pointer px-5 py-5 border border-green-400 rounded-md'>
+              <div key={post.id} className='px-10 mb-5 md:px-0'>
+                <div onClick={ev => nav(`/blog/${post.id}`)} className='duration-500 bg-green-400 hover:bg-white hover:text-green-400 text-white cursor-pointer px-5 py-5 border border-green-400 rounded-md'>
                   <h1 className='text-2xl mb-[50px] font-bold'>{post.title.substring(0, 20)}</h1>
-                  <p className='text-lg'>{post.content.substring(0, 30)}</p>
+                  <p className='text-lg'>{post.content.substring(0, 200)}</p>
                 </div>
               </div>)}
         </div>}

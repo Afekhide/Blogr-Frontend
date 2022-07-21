@@ -6,6 +6,7 @@ import Notfound from './pages/notfound';
 import {ContextProvider} from './context/Context';
 import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 import SignUp from './pages/signup';
+import Blog from './pages/blog';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route exact path='/signup' element={<SignUp/>}/>
         <Route exact path='/register' element={<SignUp/>}/>
         <Route exact path='*' element={<Notfound/>}/>
+        <Route exact path='/blog/:id' element={<Blog/>}/>
       </Routes>
       </BrowserRouter>
     </ContextProvider>

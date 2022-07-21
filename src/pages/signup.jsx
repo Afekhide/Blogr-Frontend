@@ -1,34 +1,46 @@
 import React from 'react';
 import {useEffect, useState, useContext} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {AppContext} from '../context/Context';
 import { BeatLoader } from 'react-spinners';
 
 const SignUp = () => {
+  const nav = useNavigate()
   useEffect(() => document.title = 'Sign Up', [])
-  const {user, loadersConfig} = useContext(AppContext);
+  const {loadersConfig, setUser, baseURL} = useContext(AppContext);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [waitingResponse, setWaitingResponse] = useState(false)
+
   async function submit(ev){
     ev.preventDefault();
     setWaitingResponse(true);
-    const response = await fetch('https://blogr-heroku.herokuapp.com/users/', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': '*'
-      },
-      body: JSON.stringify({
-        username, email, password
+    try {
+      const response = await fetch(`${baseURL}/users/`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': '*'
+        },
+        body: JSON.stringify({
+          username, email, password
+        })
       })
-    })
+  
+      const data = await response.json();
+      setWaitingResponse(false);
+      if(data.success.user) {
+        setUser(data.success.user)
+      }
+      console.log(data.success.user)
+      nav('/')
 
-    const data = await response.json();
-    setWaitingResponse(false);
-    console.log(data)
+
+    } catch (error) {
+        setWaitingResponse(false);
+    }
   }
 
 

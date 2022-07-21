@@ -1,11 +1,19 @@
 import React from 'react';
-import {useEffect, useState} from 'react';
+import AppContext from '../context/Context';
+import {useEffect, useState, useContext} from 'react';
 import {Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BeatLoader from "react-spinners/BeatLoader";
 
 
 const WritePage = () => {
-  useEffect(() => document.title = 'Write Post', []);
+  const navigater = useNavigate();
+  const {user, baseURL} = useContext(AppContext);
+  useEffect(() => {
+    document.title = 'Write Post'
+    if (!user) navigater('/login')
+  
+  }, []);
   const [waitingResponse, setWaitingResponse] = useState(false)
   const loaderConfig = {
       color: '#4ade80',
@@ -27,15 +35,27 @@ const WritePage = () => {
         }
       }
 
-      const response = await fetch('https://blogr-heroku.herokuapp.com/', requestOptions)
-      const results = await response.json()
-      console.log(results)
-      setWaitingResponse(false)
+      try {
+        const response = await fetch(`${baseURL}/blogs/`, requestOptions)
+        const results = await response.json()
+        console.log(results.success? true: false)
+        setWaitingResponse(false)
+        setContent('')
+        setTitle('')
+
+        if (results.success) {
+          navigater('/')
+        }
+        
+
+      } catch (error) {
+          setWaitingResponse(false)
+      }
     }
 
     const submit = (ev) => {
       ev.preventDefault()
-      postData({title, content, authorId:1})
+      postData({title, content, authorId:user.id})
     }
 
 
@@ -55,15 +75,15 @@ const WritePage = () => {
               <label htmlFor="title" className='text-xl font-semibold text-gray-600 py-2'>Title</label>
               <input className='bg-transparent border text-gray-600 border-gray-300 px-6 py-4 min-w-full outline-0 rounded-md' 
               id='title' name='title' type="text"
-              onChange = {ev => setTitle(ev.target.value.trim())}
+              vslue={title} onChange = {ev => setTitle(ev.target.value.trim())}
               required placeholder='Once upon a time' disabled={waitingResponse}/>
             </div>
 
             {/*Start of Tetxt Area*/}
             <div className='flex flex-col gap-1 mt-7'>
               <label htmlFor="content" className="font-semibold text-xl text-gray-600 py-2">Content</label>
-              <textarea className='bg-transparent outline-0 rounded-md border border-slate-100 px-6 py-6 text-gray-600' 
-              name="content" id="content" rows="10" required disabled={waitingResponse}
+              <textarea className='leading-7 bg-transparent outline-0 rounded-md border border-slate-100 px-6 py-6 text-gray-600' 
+              value={content} name="content" id="content" rows="10" required disabled={waitingResponse}
               onChange = {ev => setContent(ev.target.value.trim())}
               ></textarea>
             </div>

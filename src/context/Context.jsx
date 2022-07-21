@@ -11,11 +11,12 @@ export function ContextProvider({children}) {
         margin: '0',
         display: 'block'
     }
-    const [user, setUser] = useState({id:null, username:null, email:null});
+    const baseURL = 'http://localhost:5000'
+    const [user, setUser] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     
     return (
-        <AppContext.Provider value={{user, setSearchQuery, searchQuery, setUser, loadersConfig}}>
+        <AppContext.Provider value={{user, setSearchQuery, searchQuery, setUser, loadersConfig,baseURL}}>
             {children}
         </AppContext.Provider>
     )

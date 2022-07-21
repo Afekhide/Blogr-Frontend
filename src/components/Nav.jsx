@@ -10,7 +10,7 @@ const NavBar = () => {
   return (
     <div className='flex justify-between items-center py-4 md:px-10 px-3 bg-white shadow-sm shadow-slate-300 text-slate-600'>
         <Search/>
-        {user.id ? 
+        {user ? 
           <div className='cursor-pointer'>
             <div className='md:mr-5 py-2 px-4 rounded-md bg-green-400 hover:bg-green-500 hover:scale-105 shadow-md shadow-green-200 text-white'>
               <Link to='/write'>Write</Link>
