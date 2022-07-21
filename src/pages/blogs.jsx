@@ -13,7 +13,7 @@ const Blogs = () => {
     useEffect(async function pullPosts(){
 
       setPostsLoading(true)
-      const response = await fetch('http://localhost:5000/blogs/');
+      const response = await fetch('https://blogr-heroku.herokuapp.com/blogs/');
       const data = await response.json();
       console.log((data.blogs))
       setPosts(data.blogs)

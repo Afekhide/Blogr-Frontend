@@ -27,7 +27,7 @@ const WritePage = () => {
         }
       }
 
-      const response = await fetch('http://localhost:5000/blogs/', requestOptions)
+      const response = await fetch('https://blogr-heroku.herokuapp.com/', requestOptions)
       const results = await response.json()
       console.log(results)
       setWaitingResponse(false)
