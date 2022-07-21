@@ -6,15 +6,30 @@ import { BeatLoader } from 'react-spinners';
 
 const SignIn = () => {
   useEffect(() => document.title = 'Sign In', [])
-  const {user, loadersConfig} = useContext(AppContext);
+  const {user, loadersConfig, setUser} = useContext(AppContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [waitingResponse, setWaitingResponse] = useState(false)
   async function submit(ev){
     ev.preventDefault();
     setWaitingResponse(true);
-  }
+    const response = await fetch('http://localhost:5000/users/login', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': '*'
+      },
+      body: JSON.stringify({
+        email, password
+      })
+    })
 
+    const data = await response.json();
+    if(data.user) setUser(data.user)
+    setWaitingResponse(false);
+    console.log(data)
+  }
 
 
   return (

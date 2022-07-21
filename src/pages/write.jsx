@@ -27,7 +27,7 @@ const WritePage = () => {
         }
       }
 
-      const response = await fetch('http://localhost:9999/blogs/', requestOptions)
+      const response = await fetch('http://localhost:5000/blogs/', requestOptions)
       const results = await response.json()
       console.log(results)
       setWaitingResponse(false)

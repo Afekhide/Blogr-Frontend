@@ -14,6 +14,21 @@ const SignUp = () => {
   async function submit(ev){
     ev.preventDefault();
     setWaitingResponse(true);
+    const response = await fetch('http://localhost:5000/users/', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': '*'
+      },
+      body: JSON.stringify({
+        username, email, password
+      })
+    })
+
+    const data = await response.json();
+    setWaitingResponse(false);
+    console.log(data)
   }
 
 

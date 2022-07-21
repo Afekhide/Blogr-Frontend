@@ -13,7 +13,7 @@ const Blogs = () => {
     useEffect(async function pullPosts(){
 
       setPostsLoading(true)
-      const response = await fetch('http://localhost:9999/blogs/');
+      const response = await fetch('http://localhost:5000/blogs/');
       const data = await response.json();
       console.log((data.blogs))
       setPosts(data.blogs)
@@ -32,11 +32,15 @@ const Blogs = () => {
         }
         {(!postsLoading && posts.length<1) && <Empty/>}
         {(!postsLoading && posts?.length > 1) && 
-        <div className='flex flex-wrap flex-col justify-center md:flex-row gap-3 md:gap-6 px-5 py-8'>
+        <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 md:gap-6 py-10
+                        md:px-10 xl:px-[10vw] sm:px-[5vw]
+        '>
           {posts.map(post => 
-              <div key={post.id} className='hover:bg-green-400 hover:text-white text-gray-500 cursor-pointer w-flex-1 px-5 py-5 border border-green-400 rounded-md sm:max-w-[80vw]'>
-                <h1 className='text-2xl'>{post.title.substring(0, 20)}</h1>
-                <p className='text-lg'>{post.content.substring(0, 30)}</p>
+              <div key={post.id} className='px-10 mb-5 md:px-0 '>
+                <div  className='duration-500 bg-green-400 hover:bg-white hover:text-green-400 text-white cursor-pointer px-5 py-5 border border-green-400 rounded-md'>
+                  <h1 className='text-2xl mb-[50px] font-bold'>{post.title.substring(0, 20)}</h1>
+                  <p className='text-lg'>{post.content.substring(0, 30)}</p>
+                </div>
               </div>)}
         </div>}
         
