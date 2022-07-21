@@ -23,7 +23,7 @@ const Blog = () => {
     <div className='w-full min-h-screen'>
         <div className='h-[8vh]'>
         <div className='px-8 py-6 h-full bg-white shadow-sm shadow-slate-300 font-semibold text-xl' >
-          <Link to='/'>Blogr.</Link>
+          <Link to='/' styles={{fontWeight: 'semibold'}}>Blogr.</Link>
         </div>
       </div>
       <div className='min-h-[92vh] bg-white'>
@@ -32,11 +32,11 @@ const Blog = () => {
                 <BeatLoader loading={loading} color={loadersConfig.color} size={30}/>
             </div> 
             : 
-            <div className='min-h-[92vh] lg:px-[10vw] xl:px-[25vw] py-[5vh] flex flex-col'>
+            <div className='min-h-[92vh] w-full px-[8vw] lg:px-[10vw] xl:px-[25vw] py-[5vh] flex flex-col'>
                 <div className='text-center'>
-                    <h1 className='font-semibold text-lg xl:text-5xl pb-10'>{post.title}</h1>
+                    <h1 className='font-semibold text-lg xl:text-5xl md:text-4xl pb-10'>{post.title}</h1>
                 </div>
-                <div>
+                <div className=''>
                     <p className='text-justify text-gray-600 leading-8'>{post.content}</p>
                 </div>
             </div>
