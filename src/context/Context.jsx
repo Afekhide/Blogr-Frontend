@@ -12,6 +12,7 @@ export function ContextProvider({children}) {
         display: 'block'
     }
     const baseURL = 'https://blogr-heroku.herokuapp.com'
+    //const baseURL = 'http://localhost:5000'
     const [user, setUser] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     

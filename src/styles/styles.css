@@ -621,6 +621,10 @@ video {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
+.px-\[8vw\] {
+  padding-left: 8vw;
+  padding-right: 8vw;
+}
 .py-\[5vh\] {
   padding-top: 5vh;
   padding-bottom: 5vh;
@@ -649,18 +653,6 @@ video {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
-.px-\[5vw\] {
-  padding-left: 5vw;
-  padding-right: 5vw;
-}
-.px-\[vw\] {
-  padding-left: vw;
-  padding-right: vw;
-}
-.px-\[8vw\] {
-  padding-left: 8vw;
-  padding-right: 8vw;
-}
 .pb-10 {
   padding-bottom: 2.5rem;
 }
@@ -669,6 +661,9 @@ video {
 }
 .text-justify {
   text-align: justify;
+}
+.font-\[\"Libre_Baskerville\"\] {
+  font-family: "Libre Baskerville";
 }
 .text-xl {
   font-size: 1.25rem;

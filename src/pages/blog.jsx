@@ -34,7 +34,7 @@ const Blog = () => {
             : 
             <div className='min-h-[92vh] w-full px-[8vw] lg:px-[10vw] xl:px-[25vw] py-[5vh] flex flex-col'>
                 <div className='text-center'>
-                    <h1 className='font-semibold text-lg xl:text-5xl md:text-4xl pb-10'>{post.title}</h1>
+                    <h1 className='font-["Libre_Baskerville"] font-bold text-lg xl:text-5xl md:text-4xl pb-10'>{post.title}</h1>
                 </div>
                 <div className=''>
                     <p className='text-justify text-gray-600 leading-8'>{post.content}</p>
