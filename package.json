@@ -15,7 +15,7 @@
   "scripts": {
     "watch:css": "cd ./tailwind && postcss tailwind.css -o ../src/styles/styles.css -w",
     "start": "react-scripts start",
-    "build": "react-scripts build && echo '/* /index.html 200' | cat > build/_redirects'",
+    "build": "react-scripts build && echo '/* /index.html 200' | cat > build/_redirects",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
