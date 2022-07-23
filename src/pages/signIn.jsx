@@ -58,7 +58,7 @@ const SignIn = () => {
             <div className='mt-7 flex flex-col gap-1'>
               <input className='bg-transparent border text-gray-600 border-gray-300 px-6 py-4 min-w-full outline-0 rounded-md' 
                name='title' type="email"
-              onChange = {ev => setEmail(ev.target.value.trim())}
+              value={email} onChange = {ev => setEmail(ev.target.value.trim())}
               required placeholder='Email' disabled={waitingResponse}/>
             </div>
 
@@ -66,7 +66,7 @@ const SignIn = () => {
             <div className='mt-7 flex flex-col gap-1'>
               <input className='bg-transparent border text-gray-600 border-gray-300 px-6 py-4 min-w-full outline-0 rounded-md' 
                name='title' type="password"
-              onChange = {ev => setPassword(ev.target.value.trim())}
+              value={password} onChange = {ev => setPassword(ev.target.value.trim())}
               required placeholder='password' disabled={waitingResponse}/>
             </div>
 

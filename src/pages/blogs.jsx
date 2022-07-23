@@ -14,12 +14,12 @@ const Blogs = () => {
     useEffect(() => document.title = 'Blogs', [])
     useEffect(async function pullPosts(){
 
-      setPostsLoading(true)
       try {
         const response = await fetch(`${baseURL}/blogs/`);
         const data = await response.json();
-        
-        setPosts(data.blogs)
+        console.log(data.blogs)
+        setPosts(data)
+        console.log(posts)
         setPostsLoading(false)
       } catch (error) {
         setPostsLoading(false);
