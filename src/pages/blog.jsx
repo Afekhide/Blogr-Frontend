@@ -11,7 +11,6 @@ const Blog = () => {
     useEffect(async () => {
         let url = `${baseURL}/blogs/${id}`;
         const data = await (await fetch(url)).json();
-        
         setPost(data.success.post)
         setLoading(false)
         console.log(data.success.post.title)
